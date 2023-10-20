@@ -17,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('auth', [AuthController::class, 'index'])->name('auth');
+Route::get('auth/registration', [AuthController::class, 'login'])->name('login');
