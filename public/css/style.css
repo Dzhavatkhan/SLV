@@ -120,8 +120,8 @@ h2{
     height: 100px;
     width: 250px;
     position: relative;
-    left: 311px;
-    top: 88px;
+    left: -10px;
+    top: 25px;
     color: #000;
     text-align: center;
     font-family: 'Ubuntu';
@@ -129,6 +129,12 @@ h2{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+form{
+    position: absolute;
+    height: 600px;
+    top: 90px;
+    left: 1209px;
 }
 input[type=text]{
     width: 433px;
@@ -151,3 +157,163 @@ input::placeholder{
     font-weight: 400;
     line-height: normal;
 }
+
+form input{
+    position: relative;
+    margin-top: 37px;
+}
+.send{
+    position: relative;
+    top: 96px;
+    left: 10px;
+
+
+    border-radius: 55px;
+    width: 433px;
+    height: 71px;
+    border: transparent;
+    color: #FFF;
+    text-align: center;
+    font-family: 'Ubuntu';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: #526EA5;
+    cursor: pointer;
+}
+.send:hover{
+    transition: 0.5s;
+    background-color: #415782;
+}
+.send:active{
+    background-color: #6A8DD4;
+}
+/* .name{
+    position: absolute;
+    top: 226px;
+    left: 1212px;
+}
+.login{
+    position: absolute;
+    left: 1212px;
+    top: 334px;
+}
+.password{
+    position: absolute;
+    left: 1212px;
+    top: 659px;
+}
+.password_confirm{
+    position: absolute;
+    left: 1212px;
+    top: 767px;
+}
+.photo{
+    position: absolute;
+    left: 1212px;
+    top: 442px;
+}
+.email{
+    position: absolute;
+    left: 1212px;
+    top: 551px;
+}
+.send{
+    position: absolute;
+    top: 934px;
+    left: 1207px;
+    border-radius: 55px;
+    width: 433px;
+    height: 71px;
+    border: transparent;
+    color: #FFF;
+    text-align: center;
+    font-family: 'Ubuntu';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background: #526EA5;
+} */
+.input-file {
+	position: relative;
+	display: inline-block;
+    margin-top: 37px;
+}
+.input-file-text {
+    padding-top: 28px;
+    float: left;
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    flex-wrap: nowrap;
+    width: 350px !important;
+    height: 71px !important;
+    overflow: hidden;
+    background-color: #FFF;
+	border: 1px solid #526EA5;
+}
+.input-file-btn {
+position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	color: rgb(255 255 255);
+	text-align: center;
+	border-radius: 0 4px 4px 0;
+	background-color: #526EA5;
+	line-height: 22px;
+	height: 71px;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	border: none;
+	margin: 0;
+	transition: background-color 0.2s;
+}
+.input-file input[type=file] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 100px;
+	height: 0;
+}
+
+/* Focus */
+.input-file input[type=file]:focus + .input-file-btn {
+	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Hover/active */
+.input-file:hover .input-file-btn {
+	background-color: #415782;
+}
+.input-file:active .input-file-btn {
+	background-color: #6A8DD4;
+}
+
+/* Disabled */
+.input-file input[type=file]:disabled + .input-file-btn {
+	background-color: #fff;
+}
+.checkbox-other{
+    position: relative;
+    top: 100px;
+    width: 390px;
+    left: 50px;
+    color: #000;
+    text-align: justify;
+    font-family: 'Inter';
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.checkbox-other a{
+    color: #0D3C99;
+}
+
