@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/reg.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,9 +15,9 @@
     <div class="grid-container">
         <div class="image-block">
             <div class="text-img">
-                <h2>Добро пожаловать!</h2>
-                <p>у Вас уже есть аккаунт?</p>
-                <a href="">Войти</a>
+                <h2 class="image-block-title">Добро пожаловать!</h2>
+                <p  class="image-block-body">у Вас уже есть аккаунт?</p>
+                <button class="signIn" onclick="goToSignUp()">Войти</button>
             </div>
             <div class="dark">
                 <img src="{{asset('img/reg/reg.png')}}" alt="">
@@ -45,6 +45,10 @@
         </div>
     </div>
     <script>
+        function goToSignUp()
+        {
+            location.href = "{{route('login')}}"
+        }
         $('.input-file input[type=file]').on('change', function(){
         let file = this.files[0];
         $(this).closest('.input-file').find('.input-file-text').html(file.name);
