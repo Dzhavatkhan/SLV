@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 Route::get('auth/registration', [AuthController::class, 'registration'])->name('reg');
 Route::get('auth/log in', [AuthController::class,'login'])->name('login');
+Route::post('', [AuthController::class, 'login_proccess'])->name('login_proccess');

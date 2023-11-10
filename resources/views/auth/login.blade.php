@@ -25,10 +25,18 @@
         </div>
         <div class="form-block">
             <h2>Авторизация</h2>
-            <form action="" class="form" enctype="multipart/form-data">
+            <form action="{{route('login_proccess')}}" class="form" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="text" name="login" class="login" placeholder="Логин">
+                @error('login')
+                    {{$message}}
+                @enderror
                 <input type="text" name="password" class="password" placeholder="Пароль">
+                @error('password')
+                {{
+                    $message
+                }}
+                @enderror
                 <button type="submit" class="send">Войти</button>
             </form>
         </div>

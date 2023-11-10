@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function index(){
-        return view('auth.auth');
-    }
     public function registration(){
         return view('auth.reg');
     }
@@ -24,5 +22,8 @@ class AuthController extends Controller
     }
     public function login(){
         return view('auth.login');
+    }
+    public function login_proccess(LoginRequest $request){
+        dd($request->login);
     }
 }
