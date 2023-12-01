@@ -1,0 +1,29 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background-color: #F6F7F8;
+}
+.edit_btn{
+    border: none;
+    background-color: transparent;
+}
+.request_btn{
+    background-color: transparent;
+    border: none;
+}
+header{
+    background: #526EA5;
+    width: 1903px;
+    height: 310px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    gap: 12px;
+    flex-shrink: 0;
+}

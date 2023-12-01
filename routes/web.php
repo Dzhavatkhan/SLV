@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +21,6 @@ Route::get('/', function () {
 });
 Route::get('auth/registration', [AuthController::class, 'registration'])->name('reg');
 Route::get('auth/log in', [AuthController::class,'login'])->name('login');
-Route::post('', [AuthController::class, 'login_proccess'])->name('login_proccess');
+Route::post('log in', [AuthController::class, 'login_proccess'])->name('login_proccess');
+
+Route::get('profile', [UserController::class, 'index'])->name("profile");
