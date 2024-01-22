@@ -18,9 +18,8 @@
             <a href="">Контакты</a>
         </div>
         <div>
-            <button class="bg-[#0D3C99] rounded-md w-[207px] h-[60px] text-white text-[24px] shadow-xl duration-[0.5s] hover:scale-[1.1] hover:text-[28px]">
-                Войти
-            </button>
+            <input type="submit" onclick="login()" value="Войти" class="bg-[#0D3C99] cursor-pointer rounded-md w-[207px] h-[60px] text-white text-[24px] shadow-xl duration-[0.5s] hover:scale-[1.1] hover:text-[28px]">
+                
         </div>
     </header>
     <main>
@@ -53,13 +52,31 @@
                 </div>
             </div>
         </section>
-        <section class="hav_prob">
-
+        <section class="mt-10 hav_prob w-100% h-[484px] bg-[#526EA5] flex flex-col justify-center items-center gap-[47px]">
+            <p class="text-white text-[48px]" >Есть проблемы в городе? Оставьте заявку!</p>
+            <button class=" bg-white w-[433px] h-[71px] rounded-[55px] hover:shadow-xl hover:scale-110 duration-75 text-[24px] text-[#526EA5]">Оставить заявку</button>
         </section>
     </main>
-    <footer>
+    <footer class="mt-16 flex flex-col items-center gap-y-[13px] pb-4">
+        <div class="icons flex justify-center gap-[126px]">
+            <img src="{{asset('img/index/telegram.svg')}}" alt="">
+            <img src="{{asset('img/index/vk.svg')}}" alt="">
+            <img src="{{asset('img/index/odnoklassniki.svg')}}" alt="">
+        </div>
+        <div class="lane w-[1713px] h-[1px] bg-[#CFCDCD]">
 
+        </div>
+        <div class="info flex justify-center gap-x-96">
+            <p class="" >©️ Copyright</p>
+            <p class="">Правила компании</p>
+            <p>Политика конфидицальности</p>
+        </div>
     </footer>
 @vite("resources/js/app.js")
+<script>
+    function login(){
+        location.href = "{{route('login')}}"
+    }
+</script>
 </body>
 </html>
