@@ -9,6 +9,7 @@
 </head>
 <body>
     <header class="flex flex-row justify-between items-center px-[95px] pt-[95px]">
+
         <div>
             <img src="{{asset('img/index/LOGO.svg')}}" alt="" srcset="">
         </div>
@@ -23,8 +24,8 @@
         </div>
     </header>
     <main>
-        <section class="slider">
-
+        <section class="slider w-[99vw] px-28 h-[10vh] pl-[384px] flex justify-center">
+            {{-- @include('components.slider.slider') --}}
         </section>
         <section class="posts grid grid-cols-2 pl-[384px] gap-y-[150px]  ">
             <div class="post shadow-lg w-[414px]">
@@ -73,6 +74,7 @@
         </div>
     </footer>
 @vite("resources/js/app.js")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 <script>
     function login(){
         location.href = "{{route('login')}}"
