@@ -19,7 +19,8 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->name;
+        dd($name);
     }
 
     /**
