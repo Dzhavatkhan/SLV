@@ -33,7 +33,7 @@
             font-size: 128px;
             font-style: normal;
             font-weight: 400;
-            line-height: normal;      
+            line-height: normal;
         }
         p{
             color: #526EA5;
@@ -43,7 +43,7 @@
             font-size: 48px;
             font-style: normal;
             font-weight: 400;
-            line-height: normal;          
+            line-height: normal;
             position: absolute;
             top: 600px;
             left: 765px;
