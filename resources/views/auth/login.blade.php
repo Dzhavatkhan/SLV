@@ -3,49 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{asset('css/login.css')}}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/login.css')}}">
+    @vite("resources/css/app.css")
     <title>Авторизация</title>
 </head>
 <body>
-    <div class="grid-container">
-        <div class="image-block">
-            <div class="text-img">
-                <h2 class="image-block-title">Добро пожаловать!</h2>
-                <p  class="image-block-body">у Вас нет аккаунта?</p>
-                <button class="signIn" onclick="goToSignUp()">Регистрация</button>
-            </div>
-            <div class="dark">
-                <img src="{{asset('img/login/image 7.png')}}" alt="">
-            </div>
-        </div>
-        <div class="form-block">
-            <h2>Авторизация</h2>
-            <form action="{{route('login_proccess')}}" class="form" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="text" name="login" class="login" placeholder="Логин">
-                @error('login')
-                    {{$message}}
-                @enderror
-                <input type="text" name="password" class="password" placeholder="Пароль">
-                @error('password')
-                {{
-                    $message
-                }}
-                @enderror
-                <button type="submit" class="send">Войти</button>
+    <div class="app grid grid-cols-2 h-screen max-md:hidden max-sm:hidden">
+            <div class="decorativeDiv z-0 h-full w-full">
+                    <div class="darkContent w-full h-full z-0 flex flex-col items-center justify-center gap-8">
+                        <h2 class="text-white z-30 text-[64px] max-xl:text-[48px] font-[Itim]">
+                            Добро пожаловать!
+                        </h2>
+                        <div class="question z-30 text-3xl max-xl:text-2xl text-white">
+                            У вас нет аккаунта?
+                        </div>
+                        <button href="{{route('reg')}}" class="z-30 w-80 h-16 text-[32px] max-xl:text-xl  duration-150 hover:text-white hover:bg-[#526EA5] bg-white text-[#526EA5] rounded-md">Регистрация</button>
+                    </div>
+
+
+             </div>
+
+        <div class="formDiv h-full flex flex-col justify-center items-center gap-y-[143px] text-[48px] pt-[90px]">
+            <h2 class="font-[Ubuntu]">Вход</h2>
+            <form action="" class="flex flex-col gap-y-[143px]">
+                <div class="inputs flex flex-col gap-y-[74px]">
+                    <input type="text" class="border text-[32px] pl-[25px] py-[10px] h-[60px] outline-none border-[#526EA5]" placeholder="Пароль">
+                    <input type="text" class="border text-[32px] pl-[25px] py-[10px] h-[60px] outline-none border-[#526EA5] " placeholder="Логин">
+                </div>
+
+                <button class="bg-[#526EA5] text-[32px] text-white rounded-lg">Войти</button>
             </form>
         </div>
     </div>
-    <script>
-        function goToSignUp()
-        {
-            location.href = "{{route('reg')}}"
-        }
-    </script>
+
+
+    <div class="mobileApp h-screen w-[99vw] hidden max-sm:flex max-md:flex flex-col gap-[183px]">
+        <div class="mobileHeader h-[100px] w-full flex py-7 justify-center items-center">
+            <img class="absolute w-[93px] top-2 left-[44px]" src="{{asset('img/index/LOGO.svg')}}" alt="">
+            <div class="text-[36px] text-[#0D3C99]">Авторизация</div>
+        </div>
+        <div class="mobilForm w-full ">
+            <form action="" class="flex flex-col items-center gap-[189px]">
+                <div class="inputs flex flex-col items-center gap-[80px]">
+                    <input type="text" class="rounded-md border w-[400px] p-2 border-[#D5D6D8] outline-none bg-[#F0F2F5]" placeholder="Логин">
+                    <input type="text" class="rounded-md border w-[400px] p-2 border-[#D5D6D8] outline-none bg-[#F0F2F5]" placeholder="Пароль">
+                </div>
+                <div class="btn w-96">
+                    <button class="font-[Ubuntu] w-full  h-16 rounded-lg bg-[#526EA5] text-white text-[24px]">Войти</button>
+                    <p>У вас нет аккаунта? <a href="{{route('reg')}}">Зарегистрироваться</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

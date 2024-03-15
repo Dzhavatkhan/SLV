@@ -8,6 +8,7 @@ body{
     background-color: #EFEFEF;
 }
 .grid-container{
+    height: 99vh;
     display: grid;
     grid-template-areas:
     "image-block form-block"
@@ -16,7 +17,7 @@ body{
 }
 .image-block{
     width: 952px;
-    height: 1015px;
+    height: 100%;
     background-color: #526EA5;
     display: grid;
     grid-area: "image-block";

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Requests extends Model
 {
     use HasFactory;
+    protected $fillable = [	"categories_id","title","body","photo","status"];
 }
