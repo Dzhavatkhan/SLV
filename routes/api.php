@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Models\Category;
+use App\Models\Requests;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +19,40 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post("createRequest", [UserController::class, "createRequest"]);
-Route::post("createCategory", [AdminController::class, "createCategory"]);
+
+Route::post('signIn', [AuthController::class, 'signIn'])->name('signIn');
+Route::post('signUp', [AuthController::class, 'signUp'])->name('signUp');
+Route::get("getRequests", function() {
+    return response()->json([
+        "requests" => Requests::all()
+    ]);
+});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    //user
+    Route::get("getMyRequests", [UserController::class, "getMyRequests"]);
+    Route::post("createRequest", [UserController::class, "createRequest"]);
+    Route::put("editRequest/id{id}", [UserController::class, "editRequest"]);
+    Route::delete("deleteRequest/id{id}", [UserController::class, "deleteRequest"]);
+
+    //admin
+    Route::get("getUsers", function (){
+        return response()->json([
+            "users" => User::all()
+        ]);
+    });
+    Route::get("getCategory", function (){
+        return response()->json([
+            "categories" => Category::all()
+        ]);
+    });
+    Route::post("createCategory", [AdminController::class, "createCategory"]);
+    Route::put("editCategory/id{id}", [AdminController::class, "editCategory"]);
+    Route::put("deleteCategory/id{id}", [AdminController::class, "deleteCategory"]);
+    Route::delete("deleteRequest/id{id}", [AdminController::class, "deleteRequest"]);
+    Route::put("doneRequest/id{id}", [AdminController::class, "doneRequest"]);
+
+
+
+
+
 });

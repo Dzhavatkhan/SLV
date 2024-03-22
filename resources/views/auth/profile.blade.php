@@ -17,12 +17,12 @@
                     <img  src="{{asset('img/profile/edit.svg')}}" class="w-7" alt="">
                 </div>
             </div>
-            
+
             <div class="text-white text-[24px] max-md:text-[16px]">вОля Пархоменко</div>
         </div>
         <div class="send_req flex flex-col gap-[7px] items-center">
-            <img src="{{asset('img/profile/Add.svg')}}" class="max-md:w-20" alt="">
-            <div class="text-white text-[20px] max-md:text-[14px]">Оставьте заявку</div>
+            <img onclick="requestForm()" src="{{asset('img/profile/Add.svg')}}" class="max-md:w-20" alt="">
+            <div onclick="requestForm()" class="text-white text-[20px] max-md:text-[14px]">Оставьте заявку</div>
         </div>
         <div class="logout max-md:w-16">
             <img src="{{asset('img/profile/Logout.svg')}}" alt="" srcset="">
@@ -31,7 +31,7 @@
 
     <main>
         <div class="req_count py-5 px-40 flex flex-col gap-y-2 text-[32px] text-[#526EA5]">
-            <div class="count pl-28">Ваши заявки(2):</div>
+            <div class="count ">Ваши заявки(2):</div>
             <div class="lane h-[1px] bg-[#CFCDCD]">
 
             </div>
@@ -132,33 +132,21 @@
 
 
 
-        <div class="modal hidden w-max h-max fixed inset-0 m-auto z-20">
-            <div class="bg-white shadow-md flex justify-center">
-                <div class="cursor-pointer" onclick="modal()">&times;</div>
-                <br><br>
-                jbgkjghfkjgshkjdfkjgfdhkjsdfhgjkhfdkjghsdkjfhg
-            </div>
 
-            
-        </div>
 
-        <div class="modal_back hidden fixed inset-0 m-auto bg-black bg-opacity-60 z-10">
-                       
-        </div>
+@include('components.modal.editProfile')
+@include("components.modal.requestForm")
     </main>
 
     <script>
         function modal(){
-
-            let modal = document.querySelector(".modal")
-            let cover = document.querySelector(".modal_back")
-            // if (modal.classList.contains(".hidden")) {
-                
-            // }
+            let modal = document.querySelector(".modal_back")
             modal.classList.toggle("hidden")
-            cover.classList.toggle("hidden")
-
-
+        }
+        function requestForm(){
+            let modal = document.querySelector(".requestForm")
+            console.log(modal)
+            modal.classList.toggle("hidden")
         }
     </script>
 </body>

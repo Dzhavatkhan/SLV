@@ -17,10 +17,37 @@ class UserController extends Controller
             "categories_id" => $request->categories_id,
             "title" => $request->title,
             "body" => $request->body,
-            "photo" => $request->photo
+            "photo" => $request->photo,
+            "status" =>  "Рассматривается"
         ]);
     }
     public function getMyRequests(){
-        return Requests::where("user_id", Auth::id());
+        return response()->json([
+            "requests" => Requests::where("user_id", Auth::id())
+        ]);
+    }
+    public function editRequest(Request $request, string $id){
+        $data = $request->all(["photo", "body", "title", "categories_id"]);
+        $req = Requests::findOrFail($id);
+        if ($data["photo"] == null) {
+            $data["photo"] == $req->photo;
+        }
+        $updateReq = $req->update($data);
+        return response()->json([
+            "message" => "Запрос отредактирован"
+        ]);
+    }
+    public function deleteRequest(string $id){
+        try {
+            $deleteReq = Requests::findOrFail($id)->delete();
+            return response()->json([
+                "message" => "Запрос удален"
+            ]);
+        } catch (\ErrorException $error) {
+            return response()->json([
+                "error" => "$error"
+            ], 500);
+        }
+
     }
 }

@@ -24,7 +24,7 @@
                         <div class="question z-30 text-3xl max-xl:text-2xl text-white">
                             У вас нет аккаунта?
                         </div>
-                        <button href="{{route('reg')}}" class="z-30 w-80 h-16 text-[32px] max-xl:text-xl  duration-150 hover:text-white hover:bg-[#526EA5] bg-white text-[#526EA5] rounded-md">Регистрация</button>
+                        <button onclick="location.href = '{{route('reg')}}'" class="z-30 w-80 h-16 text-[32px] max-xl:text-xl  duration-150 hover:text-white hover:bg-[#526EA5] bg-white text-[#526EA5] rounded-md">Регистрация</button>
                     </div>
 
 
@@ -34,8 +34,8 @@
             <h2 class="font-[Ubuntu]">Вход</h2>
             <form action="" class="flex flex-col gap-y-[143px]">
                 <div class="inputs flex flex-col gap-y-[74px]">
-                    <input type="text" class="border text-[32px] pl-[25px] py-[10px] h-[60px] outline-none border-[#526EA5]" placeholder="Пароль">
-                    <input type="text" class="border text-[32px] pl-[25px] py-[10px] h-[60px] outline-none border-[#526EA5] " placeholder="Логин">
+                    <input type="text" class="border text-[32px] pl-[25px] py-[10px] h-[60px] outline-none border-[#526EA5]" placeholder="Логин">
+                    <input type="password" class="border text-[32px] pl-[25px] py-[10px] h-[60px] outline-none border-[#526EA5] " placeholder="Пароль">
                 </div>
 
                 <button class="bg-[#526EA5] text-[32px] text-white rounded-lg">Войти</button>

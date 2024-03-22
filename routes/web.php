@@ -19,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('admin_panel', function () {
+    return view('admin.admin');
+});
 Route::get('auth/registration', [AuthController::class, 'registration'])->name('reg');
 Route::get('auth/log in', [AuthController::class,'login'])->name('login');
-Route::post('log in', [AuthController::class, 'login_proccess'])->name('login_proccess');
 
 Route::get('profile', [UserController::class, 'index'])->name("profile");

@@ -7,14 +7,7 @@
 body{
     background-color: #EFEFEF;
 }
-.grid-container{
-    height: 99vh;
-    display: grid;
-    grid-template-areas:
-    "image-block form-block"
-    "image-block form-block"
-    "image-block form-block";
-}
+
 .image-block{
     width: 952px;
     height: 100%;
@@ -40,129 +33,13 @@ body{
     height: 1015px;
     z-index: 0;
 }
-.form-block{
-    display: grid;
-    grid-area: "form-block";
-}
-/* The container */
-.container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
 
-  /* Hide the browser's default checkbox */
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
 
-  .checkbox-other {
-	display: block;
-	margin: 0 0 10px 0;
-	line-height: 22px;
-}
-.checkbox-other input[type=checkbox] {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	display: inline-block;
-	width: 22px;
-	height: 22px;
-	margin: 0 5px 0 0;
-	padding: 0;
-	vertical-align: top;
-	outline: none;
-	transition: background 0.3s ease;
-	background: url('../img/reg/Checjbox-passive.svg') 0 0 no-repeat;
-	cursor: pointer;
-}
 
-/* Checked */
-.checkbox-other input[type=checkbox]:checked {
-	background-image: url('../img/reg/Checjbox-active.svg');
-}
 
-/* Focus */
-.focused input[type=checkbox] {
-	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
 
-/* Hover */
-.checkbox-other input[type=checkbox]:hover {
-	filter: brightness(110%);
-}
 
-/* Active */
-.checkbox-other input[type=checkbox]:active {
-	filter: brightness(80%);
-}
 
-/* Disabled */
-.checkbox-other input[type=checkbox]:disabled {
-	color: #666;
-	cursor: default;
-}
-.checkbox-other input[type=checkbox]:disabled {
-	filter: grayscale(100%);
-	opacity: 0.6;
-}
-
-h2{
-    height: 100px;
-    width: 250px;
-    position: relative;
-    left: -10px;
-    top: 25px;
-    color: #000;
-    text-align: center;
-    font-family: 'Ubuntu';
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-form{
-    position: absolute;
-    height: 600px;
-    top: 90px;
-    left: 1209px;
-}
-input[type=text]{
-    width: 433px;
-    border: 1px solid #526EA5;
-    background: #FFF;
-    height: 71px;
-    outline: none;
-    font-family: 'Ubuntu';
-    font-size: 24px;
-    font-style: normal;
-    padding-left: 26px;
-    font-weight: 400;
-    line-height: normal;
-}
-input::placeholder{
-    color: #7B7B7B;
-    font-family: 'Ubuntu';
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-form input{
-    position: relative;
-    margin-top: 37px;
-}
 .send{
     position: relative;
     top: 96px;
@@ -190,59 +67,12 @@ form input{
 .send:active{
     background-color: #6A8DD4;
 }
-/* .name{
-    position: absolute;
-    top: 226px;
-    left: 1212px;
-}
-.login{
-    position: absolute;
-    left: 1212px;
-    top: 334px;
-}
-.password{
-    position: absolute;
-    left: 1212px;
-    top: 659px;
-}
-.password_confirm{
-    position: absolute;
-    left: 1212px;
-    top: 767px;
-}
-.photo{
-    position: absolute;
-    left: 1212px;
-    top: 442px;
-}
-.email{
-    position: absolute;
-    left: 1212px;
-    top: 551px;
-}
-.send{
-    position: absolute;
-    top: 934px;
-    left: 1207px;
-    border-radius: 55px;
-    width: 433px;
-    height: 71px;
-    border: transparent;
-    color: #FFF;
-    text-align: center;
-    font-family: 'Ubuntu';
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    background: #526EA5;
-} */
-.input-file {
+
+/* .input-file {
 	position: relative;
 	display: inline-block;
-    margin-top: 37px;
-}
-.input-file-text {
+} */
+/* .input-file-text {
     padding-top: 28px;
     float: left;
     display: block;
@@ -254,9 +84,9 @@ form input{
     overflow: hidden;
     background-color: #FFF;
 	border: 1px solid #526EA5;
-}
-.input-file-btn {
-position: relative;
+} */
+/* .input-file-btn {
+    position: relative;
 	display: inline-block;
 	cursor: pointer;
 	outline: none;
@@ -274,7 +104,7 @@ position: relative;
 	border: none;
 	margin: 0;
 	transition: background-color 0.2s;
-}
+} */
 .input-file input[type=file] {
 	position: absolute;
 	z-index: -1;
@@ -342,28 +172,4 @@ position: relative;
     width: 621px;
     left: 325px;
 }
-.signIn{
-    width: 311px;
-    height: 71px;
-    border-radius: 55px;
-    background: #FFF;
-    position: relative;
-    top: 530px;
-    left: 330px;
-    color: #526EA5;
-    text-align: center;
-    font-family: 'Nunito';
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    justify-content: center;
-    border: transparent;
-    cursor: pointer;
-    text-align: center;
-}
-.signIn:hover{
-    transition: 0.6s;
-    background-color: #526EA5;
-    color: #EFEFEF;
-}
+

@@ -13,39 +13,56 @@ class AuthController extends Controller
         return view('auth.reg');
     }
     public function signUp(Request $request){
-        $avatar = $request->image;
-        $avatar = time().'.'.$avatar->extension();
-        $request->image->move(public_path('img/profiles'),$avatar );
+        try {
+            $avatar = $request->image;
+            $avatar = time().'.'.$avatar->extension();
+            $request->image->move(public_path('img/profiles'),$avatar );
 
-
-        $user = new User();
-        $user->name = $request->name;
-        $user->password = bcrypt($request->password);
-        $user->image = $avatar;
-        $user->save();
-        if ($user->save()) {
-            //
+            $createUser = User::create([
+                "name"     => $request->name,
+                "login"    => $request->login,
+                "role_id"  => 2,
+                "email"    => $request->email,
+                "password" => bcrypt($request->password)
+            ]);
+            if ($createUser) {
+                return response()->json([
+                    "message" => "Вы успешно зарегистрировались"
+                ], 201);
+            }
+        } catch (\ErrorException $error) {
+            return response()->json([
+                "error" => "$error"
+            ], 500);
         }
+
     }
     public function login(){
         return view('auth.login');
     }
-    public function login_proccess(LoginRequest $request){
-        $data = $request->validate([
-            "login" => ['string', 'required'],
-            "password" => ['required']
-        ]);
+    public function signIn(LoginRequest $request){
+        try {
+            $data = $request->validate([
+                "email" => ['string', 'required'],
+                "password" => ['required']
+            ]);
+            $user = User::where("login", "$data[login]")->first();
+            if ($user->password == bcrypt($data['password'])) {
+                return response()->json([
+                    "message" => "Вы успешно вошли"
+                ], 200);
+            }
+            else{
+                return response()->json([
+                    "error" => "Неверный логин или пароль"
+                ], 500);
+            }
 
-    if (auth('web')->attempt($data)) {
-        return redirect(route("profile", Auth::id()));
-    }
-    if (auth('admin')->attempt($data)) {
-        return redirect(route("admin"));
-    }
+        } catch (\ErrorException $error) {
+            return response()->json([
+                "error" => "$error"
+            ], 500);
+        }
 
-
-    return redirect(route('signIn'))->withErrors([
-    "login" => "Пользователь не найден, либо данные были введены неверно"
-]);
     }
 }
