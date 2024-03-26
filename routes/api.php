@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Requests;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,12 +28,13 @@ Route::get("getRequests", function() {
         "requests" => Requests::all()
     ]);
 });
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->group(function(){
     //user
     Route::get("getMyRequests", [UserController::class, "getMyRequests"]);
     Route::post("createRequest", [UserController::class, "createRequest"]);
     Route::put("editRequest/id{id}", [UserController::class, "editRequest"]);
     Route::delete("deleteRequest/id{id}", [UserController::class, "deleteRequest"]);
+    Route::get("logout", [AuthController::class, "logout"])->name("logout");
 
     //admin
     Route::get("getUsers", function (){
@@ -40,6 +42,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
             "users" => User::all()
         ]);
     });
+    Route::get("getUser", function (){
+        return response()->json([
+            "user" => Auth::user()
+        ]);
+    })->name("getUser");;
     Route::get("getCategory", function (){
         return response()->json([
             "categories" => Category::all()

@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function index(){
-        return view("auth.profile");
+
+        return view("auth.profile", [
+            "user" => Auth::user()
+        ]);
     }
     public function createRequest(Request $request){
         $create = Requests::create([

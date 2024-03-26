@@ -62,5 +62,17 @@
             </form>
         </div>
     </div>
+    <script>
+
+        let formData = new FormData();
+        $.ajax({
+            type: "POST",
+            url: "url",
+            data: formData,
+            success: function (response) {
+
+            }
+        });
+    </script>
 </body>
 </html>

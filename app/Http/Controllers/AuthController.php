@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,16 +16,19 @@ class AuthController extends Controller
         try {
             $avatar = $request->image;
             $avatar = time().'.'.$avatar->extension();
-            $request->image->move(public_path('img/profiles'),$avatar );
+            $request->image->move(public_path('img/avatars'),$avatar );
 
             $createUser = User::create([
                 "name"     => $request->name,
                 "login"    => $request->login,
                 "role_id"  => 2,
+                "image" => $avatar,
                 "email"    => $request->email,
                 "password" => bcrypt($request->password)
             ]);
             if ($createUser) {
+                auth('web')->login($createUser);
+                $createUser->createToken("user_token")->plainTextToken;
                 return response()->json([
                     "message" => "Вы успешно зарегистрировались"
                 ], 201);
@@ -47,7 +50,15 @@ class AuthController extends Controller
                 "password" => ['required']
             ]);
             $user = User::where("login", "$data[login]")->first();
-            if ($user->password == bcrypt($data['password'])) {
+            if ($user->password == bcrypt($data['password']) && auth('web')->attempt($data)) {
+
+                if ($user->role_id == 1) {
+                    $token = $user->createToken('admin_token')->plainTextToken;
+                }
+                else{
+                 $token = $user->createToken('user_token')->plainTextToken;
+                }
+
                 return response()->json([
                     "message" => "Вы успешно вошли"
                 ], 200);
@@ -64,5 +75,9 @@ class AuthController extends Controller
             ], 500);
         }
 
+    }
+    public function logout(){
+        auth('web')->logout();
+        User::findOrFail(Auth::id())->tokens()->delete();
     }
 }

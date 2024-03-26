@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('login');
+            $table->string('image');
             $table->foreignId("role_id")->constrained("roles");
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

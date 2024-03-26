@@ -24,14 +24,14 @@
 
         <div class="formBlock flex flex-col items-center justify-center h-screen w-full gap-9">
             <h2 class="text-[32px] max-md:text-[#0D3C99]">Регистрация</h2>
-            <form action="" method="POST" class="flex max-md:w-[422px] flex-col gap-20 items-center w-[433px]" enctype="multipart/form-data">
-                @csrf
+            <form  class="form flex max-md:w-[422px] flex-col gap-20 items-center w-[433px]" enctype="multipart/form-data">
                 <div class="inputs flex flex-col items-center gap-8 w-full">
+                    @csrf
                     <input type="text" name="name" class=" bg-white h-14  w-full border border-[#D5D6D8] rounded-md pl-4 outline-none text-[20px]"  placeholder="ФИО">
                     <input type="text" name="login" class=" bg-white h-14 w-full  border border-[#D5D6D8] rounded-md pl-4 outline-none text-[20px]" placeholder="Логин">
                     <label class="input-file h-14  border border-[#D5D6D8] w-full flex justify-between items-center  bg-white rounded-md pl-4 outline-none text-[20px]">
                         <span class="input-file-text float-left text-[#9CA3B7] " type="text">Выберите файл</span>
-                        <input type="file" name="photo">
+                        <input type="file" name="image">
                         <span class=" bg-[#526EA5] h-full px-[20px] py-[10px] flex items-center"><img class="w-7" src="{{asset('img/reg/image 22.svg')}}" alt=""></span>
                     </label>
                     <input type="text" name="email" class=" bg-white w-full h-14  border border-[#D5D6D8] rounded-md pl-4 outline-none text-[20px]" placeholder="Эл. почта">
@@ -41,7 +41,7 @@
                 <div class="btn w-full flex flex-col items-center justify-center gap-2">
                     <button type="submit" class="rounded-md w-full bg-[#526EA5] hover:scale-110  text-[20px] text-white duration-200 h-14">Отправить</button>
                     <label for="" class="flex items-center">
-                        <input id="" class="w-10 h-5" type="checkbox">Соглашаюсь с<pre> </pre><a class="text-[#526EA5] underline underline-[#526EA5]" href="https://docs.google.com/?hl=ru">  правилами и политикой сайта</a>
+                        <input id="checkbox" class="w-10 h-5" type="checkbox">Соглашаюсь с<pre> </pre><a class="text-[#526EA5] underline underline-[#526EA5]" href="https://docs.google.com/?hl=ru">  правилами и политикой сайта</a>
                     </label>
                 </div>
 
@@ -58,12 +58,28 @@
         let file = this.files[0];
         $(this).closest('.input-file').find('.input-file-text').html(file.name);
     });
+
     $(document).ready(function () {
         $('.form').on('submit', function(e){
             e.preventDefault();
-            const check = document.getElementById('checkbox');
+            const checkbox = document.getElementById('checkbox');
             if(checkbox.checked){
-                alert('ok');
+                let formData = new FormData(document.querySelector(".form"));
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('signUp')}}",
+                    data: formData,
+                    processData: false,
+                    cache:false,
+                    contentType:false,
+                    success: function (response) {
+                        console.log(response);
+                        location.href = "{{route('profile')}}"
+                    },
+                    error: function(err){
+                        console.log(err)
+                    }
+                });
             }
             else {
                 console.log('no send your data');
