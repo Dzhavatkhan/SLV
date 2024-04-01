@@ -46,6 +46,13 @@
                 </div>
 
             </form>
+            <div id="alert" class="w-[350px] bg-white fixed bottom-5 right-5 p-[10px] hidden rounded-lg items-start justify-end gap-2">
+                <div class="product-info flex">
+                  <img src="{{asset('img/admin/Male User.svg')}}" alt="Product Image" class="mr-[10px] w-12 h-12" id="product-image" />
+                  <div id="alert-text"></div>
+                </div>
+                <button class="close-btn bg-transparent text-[#526EA5] " onclick="closeAlert()">Close</button>
+            </div>
         </div>
     </div>
     @vite("resources/js/app.js")
@@ -54,6 +61,13 @@
         {
             location.href = "{{route('login')}}"
         }
+        let alert = document.getElementById("alert")
+        let alertMessage = document.getElementById("alert-text")
+
+        function closeAlert(){
+            alert.style.display='none'
+        }
+
         $('.input-file input[type=file]').on('change', function(){
         let file = this.files[0];
         $(this).closest('.input-file').find('.input-file-text').html(file.name);
@@ -76,14 +90,17 @@
                         console.log(response);
                         location.href = "{{route('profile')}}"
                     },
-                    error: function(err){
-                        console.log(err)
+                    error: function(response){
+                        alert.style.display = "flex"
+                        console.log(response.responseJSON.message);
+                        alertMessage.innerHTML = response.responseJSON.message
                     }
                 });
             }
             else {
-                console.log('no send your data');
-                console.log(checkbox.value);
+                console.log(alert);
+                alert.style.display = "flex"
+                alertMessage.innerHTML = "Вы не дали согласия"
             }
         })
     });

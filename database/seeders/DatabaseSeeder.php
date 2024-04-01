@@ -12,7 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
         \App\Models\Role::factory()->create([
             'name' => 'admin',
@@ -20,5 +19,16 @@ class DatabaseSeeder extends Seeder
         \App\Models\Role::factory()->create([
             'name' => 'user',
         ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Alex',
+            "image" => "admin.jpg",
+            "password" => bcrypt("adminWSR"),
+            "login" => "admin",
+            "email" =>  "admin@slv.ru",
+            "role_id" => 1
+        ]);
+
+
     }
 }

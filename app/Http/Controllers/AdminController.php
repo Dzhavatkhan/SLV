@@ -13,7 +13,10 @@ class AdminController extends Controller
         $data = $request->only("name");
         $createCategory = Category::create($data);
         if ($createCategory) {
-            return response()->json(["message" => "Категория создана"], 201);
+            return response()->json([
+                "message" => "Категория создана",
+                "category" => $createCategory
+            ], 201);
         }
     }
     public function editCategory(Request $request,$id)

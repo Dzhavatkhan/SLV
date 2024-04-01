@@ -43,14 +43,18 @@ class AuthController extends Controller
     public function login(){
         return view('auth.login');
     }
-    public function signIn(LoginRequest $request){
+    public function signIn(Request $request){
+
         try {
-            $data = $request->validate([
-                "email" => ['string', 'required'],
-                "password" => ['required']
-            ]);
-            $user = User::where("login", "$data[login]")->first();
-            if ($user->password == bcrypt($data['password']) && auth('web')->attempt($data)) {
+            $data = $request->only("login", "password");
+
+            $user = User::where("login", $data['login'])->first();
+            if ($user == null) {
+                return response()->json([
+                    "error" => "Неверный логин или пароль"
+                ], 500);
+            }
+            if ($user->password == bcrypt($data['password']) || auth('web')->attempt($data)) {
 
                 if ($user->role_id == 1) {
                     $token = $user->createToken('admin_token')->plainTextToken;
@@ -60,7 +64,8 @@ class AuthController extends Controller
                 }
 
                 return response()->json([
-                    "message" => "Вы успешно вошли"
+                    "message" => "Вы успешно вошли",
+                    "role_id" => $user->role_id
                 ], 200);
             }
             else{
@@ -71,7 +76,7 @@ class AuthController extends Controller
 
         } catch (\ErrorException $error) {
             return response()->json([
-                "error" => "$error"
+                "error" => $error->getMessage()
             ], 500);
         }
 

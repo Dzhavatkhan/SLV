@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Resources\RequestResource;
 use App\Models\Category;
 use App\Models\Requests;
 use App\Models\User;
@@ -23,20 +24,29 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('signIn', [AuthController::class, 'signIn'])->name('signIn');
 Route::post('signUp', [AuthController::class, 'signUp'])->name('signUp');
-Route::get("getRequests", function() {
-    return response()->json([
-        "requests" => Requests::all()
-    ]);
-});
+
+
+
 Route::middleware('auth:sanctum')->group(function(){
     //user
     Route::get("getMyRequests", [UserController::class, "getMyRequests"]);
-    Route::post("createRequest", [UserController::class, "createRequest"]);
+    Route::get("getMyRequestsBlade", [UserController::class, "getMyRequestsBlade"])->name("getMyRequests");
+    Route::post("createRequest", [UserController::class, "createRequest"])->name('createRequest');
     Route::put("editRequest/id{id}", [UserController::class, "editRequest"]);
-    Route::delete("deleteRequest/id{id}", [UserController::class, "deleteRequest"]);
+    Route::delete("deleteRequest/id{id}", [UserController::class, "deleteRequest"])->name("deleteRequest");
     Route::get("logout", [AuthController::class, "logout"])->name("logout");
 
     //admin
+    Route::get("getRequests", function() {
+
+    $get = RequestResource::collection(Requests::all());
+    return response()->json([
+        "requests" => $get
+    ]);
+    })->name("getRequest");
+
+
+
     Route::get("getUsers", function (){
         return response()->json([
             "users" => User::all()
@@ -51,12 +61,16 @@ Route::middleware('auth:sanctum')->group(function(){
         return response()->json([
             "categories" => Category::all()
         ]);
-    });
-    Route::post("createCategory", [AdminController::class, "createCategory"]);
+    })->name("getCategory");
+    Route::get("getCategoryBlade", function (){
+        $categories = Category::all();
+        return view("components.ajax.admin.getCategory", compact("categories"));
+    })->name("getCategoryBlade");
+    Route::post("createCategory", [AdminController::class, "createCategory"])->name("createCategory");
     Route::put("editCategory/id{id}", [AdminController::class, "editCategory"]);
-    Route::put("deleteCategory/id{id}", [AdminController::class, "deleteCategory"]);
+    Route::delete("deleteCategory/id{id}", [AdminController::class, "deleteCategory"])->name("deleteCategory");
     Route::delete("deleteRequest/id{id}", [AdminController::class, "deleteRequest"]);
-    Route::put("doneRequest/id{id}", [AdminController::class, "doneRequest"]);
+    Route::put("doneRequest/id{id}", [AdminController::class, "doneRequest"])->name("doneRequest");
 
 
 

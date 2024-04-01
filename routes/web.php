@@ -19,10 +19,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name("home");
-Route::get('admin_panel', function () {
-    return view('admin.admin');
-});
-Route::get('auth/registration', [AuthController::class, 'registration'])->name('reg');
-Route::get('auth/log in', [AuthController::class,'login'])->name('login');
 
-Route::get('profile', [UserController::class, 'index'])->name("profile");
+Route::middleware('auth')->group(function(){
+    Route::get('admin_panel', function () {
+        return view('admin.admin');
+    })->name("admin");
+    Route::get('profile', [UserController::class, 'index'])->name("profile");
+});
+
+
+Route::get('auth/registration', [AuthController::class, 'registration'])->name('reg');
+Route::get('auth/login', [AuthController::class,'login'])->name('login');
+

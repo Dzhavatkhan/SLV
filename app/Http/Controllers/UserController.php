@@ -15,19 +15,37 @@ class UserController extends Controller
         ]);
     }
     public function createRequest(Request $request){
-        $create = Requests::create([
-            "user_id" => Auth::id(),
-            "categories_id" => $request->categories_id,
-            "title" => $request->title,
-            "body" => $request->body,
-            "photo" => $request->photo,
-            "status" =>  "Рассматривается"
-        ]);
+        try {
+            $photo = $request->photo->getClientOriginalName();
+            $create = Requests::create([
+                "user_id" => Auth::id(),
+                "categories_id" => $request->categories_id,
+                "title" => $request->title,
+                "body" => $request->body,
+                "photo" => $photo,
+                "status" =>  "Рассматривается"
+            ]);
+            $request->photo->move(public_path("img/admin/requests/"), $photo);
+            return response()->json([
+                "message" => "Заявка отправлена на рассмотрение"
+            ]);
+        } catch (\ErrorException $error) {
+            return response()->json([
+                "error" => $error->getMessage()
+            ]);
+        }
+
+
     }
     public function getMyRequests(){
         return response()->json([
             "requests" => Requests::where("user_id", Auth::id())
         ]);
+    }
+    public function getMyRequestsBlade(){
+        $quantity = Requests::where("user_id", Auth::id())->count();
+        $requests = Requests::where("user_id", Auth::id())->get();
+        return view("components.ajax.profile.getMyRequests", compact("quantity", "requests"));
     }
     public function editRequest(Request $request, string $id){
         $data = $request->all(["photo", "body", "title", "categories_id"]);
