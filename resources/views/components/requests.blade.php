@@ -27,3 +27,24 @@
     </table>
 </div>
 
+<script>
+// $(document).ready(function () {
+//     getRequests();
+// });
+// function getRequests(){
+//     $.ajax({
+//         type: "GET",
+//         url: "{{route('getRequestBlade')}}",
+//         success: function (data) {
+//             console.log(data);
+//             $("#request-content").html(data)
+//         }
+//     });
+// }
+// function doneRequestModal(id){
+//     let modal = document.querySelector(`.doneRequestModal${id}`)
+//     console.log(modal)
+//     modal.classList.toggle("hidden")
+// }
+// </script>
+

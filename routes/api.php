@@ -44,7 +44,11 @@ Route::middleware('auth:sanctum')->group(function(){
         "requests" => $get
     ]);
     })->name("getRequest");
+    Route::get("getRequestsBlade", function() {
 
+        $requests = RequestResource::collection(Requests::all());
+        return view('components.ajax.admin.getRequests', compact("requests"));
+        })->name("getRequestBlade");
 
 
     Route::get("getUsers", function (){
@@ -70,7 +74,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::put("editCategory/id{id}", [AdminController::class, "editCategory"]);
     Route::delete("deleteCategory/id{id}", [AdminController::class, "deleteCategory"])->name("deleteCategory");
     Route::delete("deleteRequest/id{id}", [AdminController::class, "deleteRequest"]);
-    Route::put("doneRequest/id{id}", [AdminController::class, "doneRequest"])->name("doneRequest");
+    Route::post("doneRequest/id{id}", [AdminController::class, "doneRequest"])->name("doneRequest");
 
 
 

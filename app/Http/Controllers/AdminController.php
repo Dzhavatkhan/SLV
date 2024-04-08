@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\DoneRequest;
 use App\Models\Requests;
 use Illuminate\Http\Request;
 
@@ -48,14 +49,20 @@ class AdminController extends Controller
 
     }
 
-    public function doneRequest($id)
+    public function doneRequest(Request $request, $id)
     {
+        $uploadImage = $request->file('afterImage');
+        $uploadImage = $uploadImage->getClientOriginalName();
+        $request->file('afterImage')->move(public_path("img/admin/requests"), $uploadImage);
+
         Requests::findOrFail($id)->update([
             "status" => "Решено"
         ]);
-        return response()->json([
-            "message" => "Запрос решен"
+        DoneRequest::create([
+            "request_id" => $id,
+            "afterImage" => $uploadImage
         ]);
+        return redirect()->back();
     }
 
     // public function filter(){
