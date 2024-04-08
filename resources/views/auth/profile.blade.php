@@ -11,22 +11,22 @@
 
 </head>
 <body>
-    <header class="w-[99vw] bg-[#526EA5] px-40 py-20 flex justify-between items-center">
-        <div class="user_info flex flex-col items-center">
+    <header class="w-[99vw] bg-[#526EA5] px-40 py-20 flex justify-between items-center max-md:gap-[60px]">
+        <div class="user_info flex flex-col items-center max-md:w-40">
             <div class="user_image relative">
                 <img src="{{asset('img/avatars/'.Auth::user()->image)}}" class="w-32 rounded-[100%] max-md:w-20" alt="">
                 <div onclick="modal()" class="user_edit cursor-pointer max-md:w-10 absolute bottom-0 right-0 bg-white rounded-full border-[#526EA5] border-4 p-2">
-                    <img  src="{{asset('img/profile/edit.svg')}}" class="w-7" alt="">
+                    <img  src="{{asset('img/profile/edit.svg')}}" class="w-7 max-md:w-14" alt="">
                 </div>
             </div>
 
             <div class="text-white text-[24px] max-md:text-[16px]"></div>
         </div>
-        <div class="send_req flex flex-col gap-[7px] items-center">
+        <div class="send_req flex flex-col gap-[7px] items-center cursor-pointer">
             <img onclick="requestForm()" src="{{asset('img/profile/Add.svg')}}" class="max-md:w-20" alt="">
-            <div onclick="requestForm()" class="text-white text-[20px] max-md:text-[14px]">Оставьте заявку</div>
+            <div onclick="requestForm()" class="text-white text-[20px] text-center max-md:text-[14px]">Оставьте заявку</div>
         </div>
-        <div class="logout max-md:w-16" onclick="logout()">
+        <div class="logout max-md:w-16 cursor-pointer" onclick="logout()">
             <img src="{{asset('img/profile/Logout.svg')}}" alt="" srcset="">
         </div>
     </header>

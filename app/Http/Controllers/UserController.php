@@ -44,7 +44,10 @@ class UserController extends Controller
     }
     public function getMyRequestsBlade(){
         $quantity = Requests::where("user_id", Auth::id())->count();
-        $requests = Requests::where("user_id", Auth::id())->get();
+        $requests = Requests::where("user_id", Auth::id())
+        ->leftJoin("categories", "requests.categories_id", "categories.id")
+        ->selectRaw("requests.*, categories.name AS 'category'")
+        ->get();
         return view("components.ajax.profile.getMyRequests", compact("quantity", "requests"));
     }
     public function editRequest(Request $request, string $id){

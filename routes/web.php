@@ -19,7 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $requests = RequestResource::collection(Requests::where("status", "Решено")->get());
+    $requests = Requests::where("status", "Решено")
+    ->leftJoin("categories", "requests.categories_id", "categories.id")
+    ->selectRaw("requests.*, categories.name AS 'category'")
+    ->get();
     return view('welcome', compact("requests"));
 })->name("home");
 

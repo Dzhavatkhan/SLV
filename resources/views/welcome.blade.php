@@ -27,10 +27,10 @@
         <section class="posts mt-5 grid grid-cols-2 pl-[384px] gap-y-[150px] max-md:grid-cols-1 max-md:p-0 max-md:flex max-md:justify-center max-md:flex-wrap">
             @foreach ($requests as $request)
                 <div class="post shadow-lg w-[414px] max-md:flex max-md:justify-center max-md:flex-col max-md:items-center">
-                    <img src="{{asset('img/admin/requests/'. $request->photo)}}" class="w-full " alt="post_image">
-                    <div class="post-content px-5 py-2 max-md:text-center">
+                    <img src="{{asset('img/admin/requests/'. $request->photo)}}" class="w-full h-[310px]" alt="post_image">
+                    <div class="post-content px-5 py-2 max-md:text-center flex flex-col justify-center">
                         <p class=" max-md:flex max-md:gap-3 text-[20px] flex gap-[5px] title">{{$request->title}} <img src="{{asset('img/index/Done.svg')}}" class="w-[20px]" alt="" srcset=""></p>
-                        <p class="genre">{{$request->category}}</p>
+                        <p class="genre text-[#526EA5]">#{{$request->category}}</p>
                         <p class="time">11.12.2004</p>
                     </div>
                 </div>
