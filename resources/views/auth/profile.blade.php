@@ -14,7 +14,7 @@
     <header class="w-[99vw] bg-[#526EA5] px-40 py-20 flex justify-between items-center">
         <div class="user_info flex flex-col items-center">
             <div class="user_image relative">
-                <img src="{{asset('img/avatars/'.Auth::user()->image)}}" class="w-32 rounded-[100%] max-md:w-20" alt="">
+                <img src="{{asset('img/avatars/'.Auth::user()->image)}}" class="w-[100px] h-[100px] rounded-[100%] max-md:w-20 max-md:h-20" alt="">
                 <div onclick="modal()" class="user_edit cursor-pointer max-md:w-10 absolute bottom-0 right-0 bg-white rounded-full border-[#526EA5] border-4 p-2">
                     <img  src="{{asset('img/profile/edit.svg')}}" class="w-7" alt="">
                 </div>
@@ -23,10 +23,10 @@
             <div class="text-white text-[24px] max-md:text-[16px]"></div>
         </div>
         <div class="send_req flex flex-col gap-[7px] items-center">
-            <img onclick="requestForm()" src="{{asset('img/profile/Add.svg')}}" class="max-md:w-20" alt="">
-            <div onclick="requestForm()" class="text-white text-[20px] max-md:text-[14px]">Оставьте заявку</div>
+            <img onclick="requestForm()" src="{{asset('img/profile/Add.svg')}}" class="max-md:w-20 cursor-pointer" alt="">
+            <div onclick="requestForm()" class="text-white text-[20px] max-md:text-[14px] cursor-pointer">Оставьте заявку</div>
         </div>
-        <div class="logout max-md:w-16" onclick="logout()">
+        <div class="logout cursor-pointer max-md:w-16" onclick="logout()">
             <img src="{{asset('img/profile/Logout.svg')}}" alt="" srcset="">
         </div>
     </header>
@@ -36,6 +36,7 @@
     </main>
 
     <script>
+     
         $(document).ready(function () {
             getMyRequests();
             getCategories();

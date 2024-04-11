@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get("getMyRequestsBlade", [UserController::class, "getMyRequestsBlade"])->name("getMyRequests");
     Route::post("createRequest", [UserController::class, "createRequest"])->name('createRequest');
     Route::put("editRequest/id{id}", [UserController::class, "editRequest"]);
-    Route::delete("deleteRequest/id{id}", [UserController::class, "deleteRequest"])->name("deleteRequest");
+    Route::delete("delete/id{id}", [UserController::class, "deleteRequest"])->name("deleteRequest");
     Route::get("logout", [AuthController::class, "logout"])->name("logout");
 
     //admin
@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function(){
         return response()->json([
             "user" => Auth::user()
         ]);
-    })->name("getUser");;
+    })->name("getUser");
     Route::get("getCategory", function (){
         return response()->json([
             "categories" => Category::all()
@@ -69,8 +69,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post("createCategory", [AdminController::class, "createCategory"])->name("createCategory");
     Route::put("editCategory/id{id}", [AdminController::class, "editCategory"]);
     Route::delete("deleteCategory/id{id}", [AdminController::class, "deleteCategory"])->name("deleteCategory");
-    Route::delete("deleteRequest/id{id}", [AdminController::class, "deleteRequest"]);
-    Route::put("doneRequest/id{id}", [AdminController::class, "doneRequest"])->name("doneRequest");
+    Route::post("cancelRequest/id{id}", [AdminController::class, "cancelRequest"]);
+    Route::post("doneRequest/id{id}", [AdminController::class, "doneRequest"])->name("doneRequest");
 
 
 

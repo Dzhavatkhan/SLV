@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\afterImage;
 use App\Models\Category;
+use App\Models\Push;
 use App\Models\Requests;
 use Illuminate\Http\Request;
 
@@ -34,11 +36,17 @@ class AdminController extends Controller
         return response()->json(["message" => "Категория удалена"]);
 
     }
-    public function deleteRequest(string $id){
+    public function cancelRequest(Request $request, $id){
         try {
-            $deleteReq = Requests::findOrFail($id)->delete();
+            $cancelReq = Requests::findOrFail($id)->update([
+                "status" => "Отклонено"
+            ]);
+            Push::create([
+                "push" => $request->push,
+                "user_id" => Requests::findOrFail($id)->user_id
+            ]);
             return response()->json([
-                "message" => "Запрос удален"
+                "message" => "Запрос отклонен"
             ]);
         } catch (\ErrorException $error) {
             return response()->json([
@@ -48,8 +56,14 @@ class AdminController extends Controller
 
     }
 
-    public function doneRequest($id)
+    public function doneRequest(Request $request, $id)
     {
+        $image = $request->file('afterImage')->getClientOriginalName();
+        afterImage::create([
+            "request_id" => $id,
+            "image" => $image
+        ]);
+        $request->afterImage->move(public_path("img/admin/after"), $image);
         Requests::findOrFail($id)->update([
             "status" => "Решено"
         ]);
@@ -58,8 +72,6 @@ class AdminController extends Controller
         ]);
     }
 
-    // public function filter(){
 
-    // }
 
 }

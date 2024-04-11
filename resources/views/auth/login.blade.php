@@ -62,13 +62,16 @@
             <div class="text-[36px] text-[#0D3C99]">Авторизация</div>
         </div>
         <div class="mobilForm w-full ">
-            <form class="mobil-form flex flex-col items-center gap-[189px]">
+            <form class="mobilForm lala flex flex-col items-center gap-[189px]">
                 <div class="inputs flex flex-col items-center gap-[80px]">
-                    <input type="text" class="rounded-md border w-[400px] p-2 border-[#D5D6D8] outline-none bg-[#F0F2F5]" placeholder="Логин">
-                    <input type="text" class="rounded-md border w-[400px] p-2 border-[#D5D6D8] outline-none bg-[#F0F2F5]" placeholder="Пароль">
+                    <div class="login-inp flex flex-col gap-3">
+                        <input type="text" name="login" class="rounded-md border w-[400px] p-2 border-[#D5D6D8] outline-none bg-[#F0F2F5]" placeholder="Логин">
+                        <div class="error text-red-400"></div>
+                    </div>
+                    <input type="text" name="password" class="rounded-md border w-[400px] p-2 border-[#D5D6D8] outline-none bg-[#F0F2F5]" placeholder="Пароль">
                 </div>
                 <div class="btn w-96">
-                    <button  type="submit" class="font-[Ubuntu] w-full  h-16 rounded-lg bg-[#526EA5] text-white text-[24px]">Войти</button>
+                    <button  type="click" class="font-[Ubuntu] btnMobForm w-full  h-16 rounded-lg bg-[#526EA5] text-white text-[24px]">Войти</button>
                     <p>У вас нет аккаунта? <a href="{{route('reg')}}">Зарегистрироваться</a></p>
                 </div>
             </form>
@@ -121,6 +124,43 @@
         })
     })
 
+    $(document).ready(function () {
+        $('.btnMobForm').on('click', function(e){
+            e.preventDefault();
+            console.log(document.querySelector(".mobilForm"));
+            let formData = new FormData(document.querySelector(".lala"));
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+                });
+            $.ajax({
+                method: "POST",
+                url: "{{route('signIn')}}",
+                data:formData,
+                processData: false,
+                cache: false,
+                contentType:false
+            })
+            .done(function(response) {
+                console.log(response.role_id);
+                if (response.role_id == 1) {
+                    location.href = "{{route('admin')}}"
+                }
+                else{
+                    location.href = "{{route('profile')}}"
+                }
+            })
+            .fail(function(response) {
+
+                console.log("Error: ", response.responseJSON.error);
+                document.querySelector(".error").innerHTML = ''
+                document.querySelector(".error").innerHTML = response.responseJSON.error
+
+            });
+        })
+    })
     </script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Models\Requests;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $requests = Requests::where("status", "Решено")
+    ->leftJoin("categories", "requests.categories_id", "categories.id")
+    ->leftJoin("after_images", "requests.id", "after_images.request_id")
+    ->selectRaw("requests.*, categories.name AS 'category', after_images.image AS 'afterImage'")
+    ->get();
+    return view('welcome', compact("requests"));
 })->name("home");
 
 Route::middleware('auth')->group(function(){

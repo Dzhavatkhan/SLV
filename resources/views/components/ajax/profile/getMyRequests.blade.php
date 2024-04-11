@@ -6,8 +6,8 @@
 
 <div class="req_container gap-y-10 px-40  py-10 gap-x-16 place-items-center place-content-center max-md:grid-cols-1  max-sm:grid-cols-1  grid grid-cols-3">
     @foreach ($requests as $request)
-        <div class="request shadow-lg cursor-pointer pb-2 hover:shadow-xl duration-150 hover:scale-100 ">
-            <img src="{{asset('img/admin/requests/'.$request->photo)}}" alt="" class="req_img w-full">
+        <div class="request w-[411px] shadow-lg cursor-pointer pb-2 hover:shadow-xl duration-150 hover:scale-100 ">
+            <img title="Нажмите, чтобы увидеть изменения" src="{{asset('img/admin/requests/'.$request->photo)}}" onclick="after({{$request->id}}, '{{$request->photo}}', '{{$request->afterImage}}')" alt="" class="req{{$request->id}} pop max-h-[235px] w-full">
             <div class="mt-[13px] req_title px-5 flex justify-between">
                 <p class="text-[24px]">{{$request->title}}</p>
                 @if ($request->status == "Рассматривается")
@@ -18,6 +18,7 @@
                 @endif
             </div>
             <p class="px-5 text-[20px]">{{$request->body}}</p>
+            <p class="px-5 text-[16px] text-[#0D3C99]" >#{{$request->category}}</p>
             <div class="content px-5 pt-3 pb-3 w-full flex justify-between">
                 <p class="text-[16px] text-[#96969696]">{{$request->updated_at->format("d.m.Y")}}</p>
                 <div class="icons inline-flex gap-2">
@@ -26,6 +27,7 @@
                 </div>
             </div>
         </div>
+
     @endforeach
 </div>
 @else
@@ -48,3 +50,19 @@
 
 @include('components.modal.editProfile')
 @include("components.modal.requestForm")
+<script>
+        function after(id, before, after){
+            console.log(id, before, after);
+                let afterImage = `{{asset('img/admin/after/${after}')}}`
+                let beforeImage = `{{asset('img/admin/requests/${before}')}}`
+                let image = document.querySelector(`.req${id}`)
+                if (image.src == afterImage) {
+                    image.src = beforeImage
+                }
+                else{
+                    image.src = afterImage                    
+                }
+
+                console.log(image);
+        }   
+        </script>
