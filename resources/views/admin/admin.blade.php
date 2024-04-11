@@ -16,6 +16,9 @@
             color: #526EA5;
 
         }
+        form{
+            position: relative;
+        }
     </style>
     <div class="flex h-screen">
         <div class="side_bar flex py-10  flex-col items-center justify-between w-[369px] bg-[#526EA5] h-screen">
@@ -176,9 +179,16 @@ function cancelRequest(id){
         }
     });
 }
+function doneRequestModal(id){
+    let modal = document.querySelector(`.doneRequestModal${id}`)
+    console.log(modal)
+    modal.classList.toggle("hidden")
+}
 function doneRequest(id){
     let status = document.getElementById("status")
     let done_btn = document.getElementById("done-btn")
+    let formData = new FormData(document.querySelector(".formDone"));
+    console.log(document.querySelector(".formDone"));
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -194,6 +204,7 @@ function doneRequest(id){
         processData: false,
         contentType: false, // Не устанавливайте заголовок Content-Type
         url: `/api/doneRequest/id${id}`,
+        data: formData,
         success: function (response) {
             status.innerHTML = '';
             status.innerHTML = 'Решено';
@@ -303,9 +314,50 @@ async function getRequests(){
                     <div class="text-[32px] flex justify-start" onclick="moreModal(${request.id})">
                         Закрыть
                     </div>
+                    <form enctype="multipart/form-data" class="w-full h-full">
+                    <div class="form_header w-full flex justify-around" >
+                        <div>
+
+                        </div>
+                        <div>
+                            Принять заявку
+                        </div>
+                        <div class="cursor-pointer">
+                            Закрыть
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-[50px]">
+                        <input type="file" name="afterImage">
+                        <button class="bg-[#0D3C99] text-white" onclick="doneRequest(${request.id})">Оправить</button>
+                    </div>
+                </form>
                 </div>
             </div>
         </div>
+
+    <div class="doneRequestModal${request.id} fixed hidden inset-0 m-auto bg-black bg-opacity-60 z-10">
+        <div class="w-max h-max fixed inset-0 m-auto z-20">
+            <div class="bg-white shadow-md w-[695px] h-[500px] flex flex-col items-center gap-[50px]">
+                <form enctype="multipart/form-data" class="w-full h-full">
+                    <div class="form_header w-full flex justify-around" >
+                        <div>
+
+                        </div>
+                        <div>
+                            Принять заявку
+                        </div>
+                        <div class="cursor-pointer">
+                            Закрыть
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-[50px]">
+                        <input type="file" name="afterImage">
+                        <button class="bg-[#0D3C99] text-white" onclick="doneRequest(${request.id})">Оправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
         `
         }
 

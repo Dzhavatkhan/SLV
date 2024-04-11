@@ -44,7 +44,11 @@ Route::middleware('auth:sanctum')->group(function(){
         "requests" => $get
     ]);
     })->name("getRequest");
+    Route::get("getRequestsBlade", function() {
 
+        $requests = RequestResource::collection(Requests::all());
+        return view('components.ajax.admin.getRequests', compact("requests"));
+        })->name("getRequestBlade");
 
 
     Route::get("getUsers", function (){

@@ -19,7 +19,12 @@
             <a href="">Контакты</a>
         </div>
         <div class="max-md:hidden">
-            <input type="submit" onclick="login()" value="Войти" class="bg-[#0D3C99] cursor-pointer rounded-md w-[207px] h-[60px] text-white text-[24px] shadow-xl duration-[0.5s] hover:scale-[1.1]">
+            @auth
+                <input type="submit" onclick="location.href='http://127.0.0.1:8000/profile'" value="Войти" class="bg-[#0D3C99] cursor-pointer rounded-md w-[207px] h-[60px] text-white text-[24px] shadow-xl duration-[0.5s] hover:scale-[1.1]">
+            @endauth
+            @guest
+                <input type="submit" onclick="login()" value="Войти" class="bg-[#0D3C99] cursor-pointer rounded-md w-[207px] h-[60px] text-white text-[24px] shadow-xl duration-[0.5s] hover:scale-[1.1]">
+            @endguest
         </div>
 
         @include('components.modal.hamburger-menu')

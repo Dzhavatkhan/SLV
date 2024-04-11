@@ -67,9 +67,7 @@ class AdminController extends Controller
         Requests::findOrFail($id)->update([
             "status" => "Решено"
         ]);
-        return response()->json([
-            "message" => "Запрос решен"
-        ]);
+        return redirect()->back();
     }
 
 
